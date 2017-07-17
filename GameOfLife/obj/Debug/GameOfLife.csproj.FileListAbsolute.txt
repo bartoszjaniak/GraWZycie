@@ -4,3 +4,9 @@ c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLi
 c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csprojResolveAssemblyReference.cache
 c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
 c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.csprojResolveAssemblyReference.cache
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.pdb

@@ -57,9 +57,9 @@ namespace GameOfLife.Models
         {
             Byt[,] bytyTemp = byty;
             //byty = new Byt[szerokosc, wysokosc];
-            for (int i = 0; i < szerokosc; i++)
+            for (int i = 0; i < wysokosc; i++)
             {
-                for (int k = 0; k < wysokosc; k++)
+                for (int k = 0; k < szerokosc; k++)
                 {
                     //sprawdzanie sąsiadów
                     int iloscSasiadow = 0;
@@ -75,7 +75,7 @@ namespace GameOfLife.Models
                     if ((i < szerokosc - 1 && k< wysokosc - 1) && bytyTemp[i + 1, k + 1].zywa) iloscSasiadow++;
 
                     if (bytyTemp[i, k].zywa && (iloscSasiadow < 2 || iloscSasiadow > 3)) byty[i, k].Ubij();
-                    else if (!bytyTemp[i, k].zywa &&  iloscSasiadow == 3) byty[i, k].Ozyw();
+                    if (!bytyTemp[i, k].zywa &&  iloscSasiadow == 3) byty[i, k].Ozyw();
                 }
             }
 

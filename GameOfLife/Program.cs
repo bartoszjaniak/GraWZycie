@@ -10,10 +10,10 @@ namespace GameOfLife
 {
     class Program
     {
-        const int SZEROKOSC = 150;
+        const int SZEROKOSC = 50;
         const int WYSOKOSC = 50;
         const int CZAS = 200;
-        const int ZYWYCH = (int)(SZEROKOSC*WYSOKOSC*0.2);
+        const int ZYWYCH = (int)(SZEROKOSC*WYSOKOSC*0.1);
         public static Plansza plansza;
 
         static void Main(string[] args)
