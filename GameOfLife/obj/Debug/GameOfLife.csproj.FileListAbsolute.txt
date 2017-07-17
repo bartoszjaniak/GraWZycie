@@ -1,0 +1,6 @@
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe.config
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csprojResolveAssemblyReference.cache
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
+c:\users\bartoszjaniak\documents\visual studio 2017\Projects\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb
