@@ -19,7 +19,8 @@ namespace GameOfLife
         static void Main(string[] args)
         {
             //Console.OutputEncoding = Encoding.Unicode.Ut
-            plansza = new Plansza(SZEROKOSC, WYSOKOSC, ZYWYCH);
+            plansza = new Plansza(SZEROKOSC, WYSOKOSC,true,ZYWYCH);
+            //plansza = new Plansza(SZEROKOSC, WYSOKOSC, false);
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Write(plansza);
 
@@ -36,3 +37,19 @@ namespace GameOfLife
 
     }
 }
+
+
+
+/*
+ * SOFT
+ * 1) Nie używać if,while,switch, ?:
+ * 2) Każda metoda musi mieć jak najmniej lini
+ * 3) Jak najmniej kliknięć myszką
+ * 
+ * Hard
+ * 1) 1 + foreach
+ * 2) 2 + Max 2 linie 
+ * 3) Bez myszki
+ * 
+ * 
+*/

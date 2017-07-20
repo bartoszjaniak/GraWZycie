@@ -10,3 +10,9 @@ C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\bin\Debug\GameOfLife.pdb
 C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.csprojResolveAssemblyReference.cache
 C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.exe
 C:\Users\bartoszjaniak\Projekty\GraWZycie\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\bjaniak\Documents\GraWZycie\GameOfLife\obj\Debug\GameOfLife.csprojResolveAssemblyReference.cache

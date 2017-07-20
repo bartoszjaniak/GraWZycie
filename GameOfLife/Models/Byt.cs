@@ -8,25 +8,36 @@ namespace GameOfLife.Models
 {
     class Byt
     {
-        public bool zywa;
+        public int zywa;
+        public string symbol;
+        public int x;
+        public int y;
 
         public Byt()
         {
-            zywa = false;
+            Ubij();
+        }
+        public Byt(int x, int y)
+        {
+            Ubij();
+            this.x = x;
+            this.y = y;
         }
 
         public override string ToString()
         {
-            return zywa ? "█" : "░";
+            return symbol;
         }
 
         public void Ozyw()
         {
-            zywa = true;
+            zywa = 1;
+            symbol = "█";
         }
         public void Ubij()
         {
-            zywa = false;
+            zywa = 0;
+            symbol = "░";
         }
     }
 }

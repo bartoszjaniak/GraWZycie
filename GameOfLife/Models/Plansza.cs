@@ -11,32 +11,65 @@ namespace GameOfLife.Models
         public int szerokosc;
         public int wysokosc;
         public Byt[,] byty;
+        List<Byt> lista;
 
-        public Plansza(int szer, int wys, int iloscZywych = 10)
+        static readonly string[] Generator = new string[]
+            {
+              "                        1           ",
+              "                      1 1           ",
+              "            11      11            11",
+              "           1   1    11            11",
+              "11        1     1   11              ",
+              "11        1   1 11    1 1           ",
+              "          1     1       1           ",
+              "           1   1                    ",
+              "            11                      "
+            };
+
+        public Plansza(int szer, int wys, bool losowo = true, int iloscZywych = 10)
         {
             wysokosc = wys;
             szerokosc = szer;
             byty = new Byt[szerokosc, wysokosc];
-            for(int i = 0; i < szerokosc; i++)
+            lista = new List<Byt>();
+
+            
+
+            for (int i = 0; i < szerokosc; i++)
             {
-                for(int k = 0; k < wysokosc; k++)
+                for (int k = 0; k < wysokosc; k++)
                 {
                     byty[i, k] = new Byt();
+                    lista.Add(new Byt(i, k));
                 }
             }
-            GenerujLosowe(iloscZywych);
+
+            if (losowo)
+                GenerujLosowe(iloscZywych);
+            else Generate(Generator, szerokosc, wysokosc);
         }
 
         private void GenerujLosowe(int ilosc)
         {
             Random r = new Random();
-            for(int i = 0; i < ilosc; i++)
+            for (int i = 0; i < ilosc; i++)
             {
                 int x = r.Next(szerokosc);
                 int y = r.Next(wysokosc);
                 byty[x, y].Ozyw();
             }
         }
+
+        private void Generate(string[] pattern, int sx, int sy)
+        {
+            for (int y = 0; y < pattern.Length; y++)
+            {
+                for (int x = 0; x < pattern[y].Length; x++)
+                    if (pattern[y][x] != ' ')
+                        this.byty[sx + x, sy + y].Ozyw();
+            }
+        }
+
 
         public override string ToString()
         {
@@ -62,25 +95,86 @@ namespace GameOfLife.Models
                 for (int k = 0; k < szerokosc; k++)
                 {
                     //sprawdzanie sąsiadów
-                    int iloscSasiadow = 0;
-                    if ((i > 0 && k > 0) && bytyTemp[i - 1, k - 1].zywa) iloscSasiadow++;
-                    if ((i > 0) && bytyTemp[i - 1, k].zywa) iloscSasiadow++;
-                    if ((i > 0 && k <wysokosc - 1) && bytyTemp[i - 1, k + 1].zywa) iloscSasiadow++;
+                    int iloscSasiadow = slg(k, i) + ssg(k, i) + spg(k, i) + sl(k, i) + sp(k, i) + sld(k, i) + ssd(k, i) + spd(k, i);
+                    
+                    //ZABIJANIE I OŻYWIANIE
+                    if (bytyTemp[i, k].zywa != 1 && iloscSasiadow == 3) 
+                        byty[i, k].Ozyw();
+                    if (bytyTemp[i, k].zywa == 1 && (iloscSasiadow < 2 || iloscSasiadow > 3)) 
+                        byty[i, k].Ubij();
 
-                    if ((k > 0) && bytyTemp[i, k - 1].zywa) iloscSasiadow++;
-                    if ((k < wysokosc - 1) && bytyTemp[i, k + 1].zywa) iloscSasiadow++;
-
-                    if ((i < szerokosc - 1 && k > 0) && bytyTemp[i + 1, k - 1].zywa) iloscSasiadow++;
-                    if ((i < szerokosc - 1) && bytyTemp[i + 1, k].zywa) iloscSasiadow++;
-                    if ((i < szerokosc - 1 && k< wysokosc - 1) && bytyTemp[i + 1, k + 1].zywa) iloscSasiadow++;
-
-                    if (bytyTemp[i, k].zywa && (iloscSasiadow < 2 || iloscSasiadow > 3)) byty[i, k].Ubij();
-                    if (!bytyTemp[i, k].zywa &&  iloscSasiadow == 3) byty[i, k].Ozyw();
                 }
             }
-
         }
 
+        //public void NextStep2()
+        //{
+        //    int ilosc;
+        //    foreach (var a in lista)
+        //    {
+        //        int iloscSasiadow = slg(k, i) + ssg(k, i) + spg(k, i) + sl(k, i) + sp(k, i) + sld(k, i) + ssd(k, i) + spd(k, i);                    
+        //    }
+        //}
+
+        3
+
+
+        #region sprawdzanie sasiadów
+        //lewa góra
+        private int slg(int x, int y)
+        {
+            return byty[validateSzer(x) - 1, validateWys(y) - 1].zywa;
+        }
+        //środek góra
+        private int ssg(int x, int y)
+        {
+            return byty[validateSzer(x), validateWys(y) - 1].zywa;
+        }
+        //prawa góra
+        private int spg(int x, int y)
+        {
+            return byty[validateSzer(x) + 1, validateWys(y) - 1].zywa;
+        }
+        
+        //lewa
+        private int sl(int x, int y)
+        {
+            return byty[validateSzer(x) - 1, validateWys(y)].zywa;
+        }
+        //prawa
+        private int sp(int x, int y)
+        {
+            return byty[validateSzer(x) + 1, validateWys(y)].zywa;
+        }
+
+        //lewa dol
+        private int sld(int x, int y)
+        {
+            return byty[validateSzer(x) - 1, validateWys(y) + 1].zywa;
+        }
+        //środek dol
+        private int ssd(int x, int y)
+        {
+            return byty[validateSzer(x), validateWys(y) + 1].zywa;
+        }
+        //prawa dol
+        private int spd(int x, int y)
+        {
+            return byty[validateSzer(x) + 1, validateWys(y) + 1].zywa;
+        }
+        #endregion
+
+        //WALIDACJA WYSOKOSCI
+        private int validateWys(int y)
+        {
+            return Math.Max(Math.Min(y, wysokosc - 2), 1);
+        }
+
+        //WALIDACJA SZEROKOSCI
+        private int validateSzer(int x)
+        {
+            return Math.Max(Math.Min(x, szerokosc - 2), 1);
+        }
 
     }
 }
