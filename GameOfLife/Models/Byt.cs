@@ -12,9 +12,11 @@ namespace GameOfLife.Models
         public string symbol;
         public int x;
         public int y;
+        public int iloscSasiadow;
 
         public Byt()
         {
+            iloscSasiadow = 0;
             Ubij();
         }
         public Byt(int x, int y)
@@ -26,6 +28,7 @@ namespace GameOfLife.Models
 
         public override string ToString()
         {
+            //return iloscSasiadow == 0 ? symbol : iloscSasiadow.ToString();
             return symbol;
         }
 

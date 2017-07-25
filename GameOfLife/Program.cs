@@ -11,25 +11,31 @@ namespace GameOfLife
     class Program
     {
         const int SZEROKOSC = 50;
-        const int WYSOKOSC = 50;
-        const int CZAS = 200;
+        const int WYSOKOSC = 20;
+        const int CZAS = 50;
         const int ZYWYCH = (int)(SZEROKOSC*WYSOKOSC*0.1);
         public static Plansza plansza;
 
         static void Main(string[] args)
         {
             //Console.OutputEncoding = Encoding.Unicode.Ut
-            plansza = new Plansza(SZEROKOSC, WYSOKOSC,true,ZYWYCH);
-            //plansza = new Plansza(SZEROKOSC, WYSOKOSC, false);
+           //plansza = new Plansza(SZEROKOSC, WYSOKOSC,true,ZYWYCH);
+            plansza = new Plansza(SZEROKOSC, WYSOKOSC, false);
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Write(plansza);
 
+            int i = 0;
             while (true)
             {
                 //Console.ReadKey();
-                plansza.NextStep();
-                Console.Clear();
+                
+                
                 Console.Write(plansza);
+                //plansza.Drukuj();
+                Console.WriteLine(i);
+                //Console.ReadKey();
+                plansza.NextStep();
+                i++;
                 Thread.Sleep(CZAS);
             }
         }

@@ -26,6 +26,19 @@ namespace GameOfLife.Models
               "            11                      "
             };
 
+        static readonly string[] Generator2 = new string[]
+        {
+              "                                    ",
+              "      1                             ",
+              "       1                            ",
+              "     111                            ",
+              "                                    ",
+              "                                    ",
+              "                                    ",
+              "                                    "
+        };
+
+
         public Plansza(int szer, int wys, bool losowo = true, int iloscZywych = 10)
         {
             wysokosc = wys;
@@ -46,7 +59,7 @@ namespace GameOfLife.Models
 
             if (losowo)
                 GenerujLosowe(iloscZywych);
-            else Generate(Generator, szerokosc, wysokosc);
+            else Generate(Generator, 5, 5);
         }
 
         private void GenerujLosowe(int ilosc)
@@ -62,6 +75,7 @@ namespace GameOfLife.Models
 
         private void Generate(string[] pattern, int sx, int sy)
         {
+
             for (int y = 0; y < pattern.Length; y++)
             {
                 for (int x = 0; x < pattern[y].Length; x++)
@@ -70,9 +84,29 @@ namespace GameOfLife.Models
             }
         }
 
+        public void Drukuj(Byt[,] tabelka = null)
+        {
+            Console.Clear();
+            if (tabelka == null) tabelka = byty;
+            string A = "";
+            for (int i = 0; i < wysokosc; i++)
+            {
+                Console.Write('\n');
+                for (int k = 0; k < szerokosc; k++)
+                {
+                    if (tabelka[k, i].zywa == 1)
+                        Console.BackgroundColor = ConsoleColor.Green;
+                    else
+                        Console.BackgroundColor = ConsoleColor.Red;
+                    Console.Write(tabelka[k, i]);
+
+                }
+            }
+        }
 
         public override string ToString()
         {
+            Console.Clear();
             string A = "";
             for (int i = 0; i < wysokosc; i++)
             {
@@ -88,20 +122,69 @@ namespace GameOfLife.Models
 
         public void NextStep()
         {
-            Byt[,] bytyTemp = byty;
-            //byty = new Byt[szerokosc, wysokosc];
-            for (int i = 0; i < wysokosc; i++)
+            Byt[,] bytyTemp = new Byt[szerokosc, wysokosc];
+            for (int x = 0; x < szerokosc; x++)
             {
-                for (int k = 0; k < szerokosc; k++)
+                for (int y = 0; y < wysokosc; y++)
+                {
+                    bytyTemp[x, y] = new Byt();
+                    bytyTemp[x, y].zywa = byty[x, y].zywa;
+                }
+            }
+                    //byty = new Byt[szerokosc, wysokosc];
+                    for (int x = 0; x < szerokosc; x++)
+            {
+                for (int y = 0; y < wysokosc; y++)
                 {
                     //sprawdzanie sąsiadów
-                    int iloscSasiadow = slg(k, i) + ssg(k, i) + spg(k, i) + sl(k, i) + sp(k, i) + sld(k, i) + ssd(k, i) + spd(k, i);
-                    
+                    //int iloscSasiadow = slg(k, i) + ssg(k, i) + spg(k, i) + sl(k, i) + sp(k, i) + sld(k, i) + ssd(k, i) + spd(k, i);
+
+                    //sprawdzanie sąsiadów
+                    int iloscSasiadow = 0;
+
+                    //lewa
+                    if (x > 0 && y > 0 && bytyTemp[x - 1, y - 1].zywa == 1)
+                        iloscSasiadow++;
+                    if (x > 0 && bytyTemp[x - 1, y].zywa == 1)
+                        iloscSasiadow++;
+                    if (x > 0 && y < wysokosc - 1 && bytyTemp[x - 1, y + 1].zywa == 1)
+                        iloscSasiadow++;
+
+                    //srodek
+                    if (y > 0 && bytyTemp[x, y - 1].zywa == 1)
+                        iloscSasiadow++;
+                    if (y < wysokosc - 1 && bytyTemp[x, y + 1].zywa == 1)
+                        iloscSasiadow++;
+
+                    //prawa
+                    if (x < szerokosc - 1 && y > 0 && bytyTemp[x + 1, y - 1].zywa == 1) iloscSasiadow++;
+                    if (x < szerokosc - 1 && bytyTemp[x + 1, y].zywa == 1) iloscSasiadow++;
+                    if (x < szerokosc - 1 && y < wysokosc - 1 && bytyTemp[x + 1, y + 1].zywa == 1) iloscSasiadow++;
+
+
+
+
+
+
+                    //if ((i > 0 && k > 0) && bytyTemp[i - 1, k - 1].zywa == 1) iloscSasiadow++;
+                    //if ((i > 0) && k == 0 && bytyTemp[i - 1, k].zywa == 1) iloscSasiadow++;
+                    //if ((i > 0 && k < wysokosc-1 && k > 0) && bytyTemp[i - 1, k + 1].zywa == 1) iloscSasiadow++;
+
+                    //if ((k > 0) && bytyTemp[i, k - 1].zywa == 1) iloscSasiadow++;
+                    //if ((k < wysokosc - 1) && bytyTemp[i, k + 1].zywa == 1) iloscSasiadow++;
+
+                    //if ((i < szerokosc - 1 && k > 0) && bytyTemp[i + 1, k - 1].zywa == 1) iloscSasiadow++;
+                    //if ((i < szerokosc - 1) && bytyTemp[i + 1, k].zywa == 1) iloscSasiadow++;
+                    //if ((i < szerokosc - 1 && k < wysokosc - 1) && bytyTemp[i + 1, k + 1].zywa == 1) iloscSasiadow++;
+
+
+                    byty[x, y].iloscSasiadow = iloscSasiadow;
                     //ZABIJANIE I OŻYWIANIE
-                    if (bytyTemp[i, k].zywa != 1 && iloscSasiadow == 3) 
-                        byty[i, k].Ozyw();
-                    if (bytyTemp[i, k].zywa == 1 && (iloscSasiadow < 2 || iloscSasiadow > 3)) 
-                        byty[i, k].Ubij();
+                    //Drukuj(bytyTemp);
+                     if (bytyTemp[x, y].zywa != 1 && iloscSasiadow == 3) 
+                        byty[x, y].Ozyw();
+                    if (bytyTemp[x, y].zywa == 1 && (iloscSasiadow < 2 || iloscSasiadow > 3)) 
+                        byty[x, y].Ubij();
 
                 }
             }
@@ -116,8 +199,8 @@ namespace GameOfLife.Models
         //    }
         //}
 
-        3
-
+        
+    
 
         #region sprawdzanie sasiadów
         //lewa góra
