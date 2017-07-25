@@ -12,6 +12,7 @@ namespace GameOfLife.Models
         public int wysokosc;
         public Byt[,] byty;
         List<Byt> lista;
+        Byt[,] bytyTemp;
 
         static readonly string[] Generator = new string[]
             {
@@ -122,7 +123,7 @@ namespace GameOfLife.Models
 
         public void NextStep()
         {
-            Byt[,] bytyTemp = new Byt[szerokosc, wysokosc];
+            bytyTemp = new Byt[szerokosc, wysokosc];
             for (int x = 0; x < szerokosc; x++)
             {
                 for (int y = 0; y < wysokosc; y++)
@@ -132,34 +133,34 @@ namespace GameOfLife.Models
                 }
             }
                     //byty = new Byt[szerokosc, wysokosc];
-                    for (int x = 0; x < szerokosc; x++)
+            for (int x = 0; x < szerokosc; x++)
             {
                 for (int y = 0; y < wysokosc; y++)
                 {
                     //sprawdzanie sąsiadów
-                    //int iloscSasiadow = slg(k, i) + ssg(k, i) + spg(k, i) + sl(k, i) + sp(k, i) + sld(k, i) + ssd(k, i) + spd(k, i);
+                    int iloscSasiadow = slg(x, y) + ssg(x, y) + spg(x, y) + sl(x, y) + sp(x, y) + sld(x, y) + ssd(x, y) + spd(x, y);
 
-                    //sprawdzanie sąsiadów
-                    int iloscSasiadow = 0;
+                    ////sprawdzanie sąsiadów
+                    //int iloscSasiadow = 0;
 
-                    //lewa
-                    if (x > 0 && y > 0 && bytyTemp[x - 1, y - 1].zywa == 1)
-                        iloscSasiadow++;
-                    if (x > 0 && bytyTemp[x - 1, y].zywa == 1)
-                        iloscSasiadow++;
-                    if (x > 0 && y < wysokosc - 1 && bytyTemp[x - 1, y + 1].zywa == 1)
-                        iloscSasiadow++;
+                    ////lewa
+                    //if (x > 0 && y > 0 && bytyTemp[x - 1, y - 1].zywa == 1)
+                    //    iloscSasiadow++;
+                    //if (x > 0 && bytyTemp[x - 1, y].zywa == 1)
+                    //    iloscSasiadow++;
+                    //if (x > 0 && y < wysokosc - 1 && bytyTemp[x - 1, y + 1].zywa == 1)
+                    //    iloscSasiadow++;
 
-                    //srodek
-                    if (y > 0 && bytyTemp[x, y - 1].zywa == 1)
-                        iloscSasiadow++;
-                    if (y < wysokosc - 1 && bytyTemp[x, y + 1].zywa == 1)
-                        iloscSasiadow++;
+                    ////srodek
+                    //if (y > 0 && bytyTemp[x, y - 1].zywa == 1)
+                    //    iloscSasiadow++;
+                    //if (y < wysokosc - 1 && bytyTemp[x, y + 1].zywa == 1)
+                    //    iloscSasiadow++;
 
-                    //prawa
-                    if (x < szerokosc - 1 && y > 0 && bytyTemp[x + 1, y - 1].zywa == 1) iloscSasiadow++;
-                    if (x < szerokosc - 1 && bytyTemp[x + 1, y].zywa == 1) iloscSasiadow++;
-                    if (x < szerokosc - 1 && y < wysokosc - 1 && bytyTemp[x + 1, y + 1].zywa == 1) iloscSasiadow++;
+                    ////prawa
+                    //if (x < szerokosc - 1 && y > 0 && bytyTemp[x + 1, y - 1].zywa == 1) iloscSasiadow++;
+                    //if (x < szerokosc - 1 && bytyTemp[x + 1, y].zywa == 1) iloscSasiadow++;
+                    //if (x < szerokosc - 1 && y < wysokosc - 1 && bytyTemp[x + 1, y + 1].zywa == 1) iloscSasiadow++;
 
 
 
@@ -206,44 +207,44 @@ namespace GameOfLife.Models
         //lewa góra
         private int slg(int x, int y)
         {
-            return byty[validateSzer(x) - 1, validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x) - 1, validateWys(y) - 1].zywa;
         }
         //środek góra
         private int ssg(int x, int y)
         {
-            return byty[validateSzer(x), validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x), validateWys(y) - 1].zywa;
         }
         //prawa góra
         private int spg(int x, int y)
         {
-            return byty[validateSzer(x) + 1, validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x) + 1, validateWys(y) - 1].zywa;
         }
         
         //lewa
         private int sl(int x, int y)
         {
-            return byty[validateSzer(x) - 1, validateWys(y)].zywa;
+            return bytyTemp[validateSzer(x) - 1, validateWys(y)].zywa;
         }
         //prawa
         private int sp(int x, int y)
         {
-            return byty[validateSzer(x) + 1, validateWys(y)].zywa;
+            return bytyTemp[validateSzer(x) + 1, validateWys(y)].zywa;
         }
 
         //lewa dol
         private int sld(int x, int y)
         {
-            return byty[validateSzer(x) - 1, validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x) - 1, validateWys(y) + 1].zywa;
         }
         //środek dol
         private int ssd(int x, int y)
         {
-            return byty[validateSzer(x), validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x), validateWys(y) + 1].zywa;
         }
         //prawa dol
         private int spd(int x, int y)
         {
-            return byty[validateSzer(x) + 1, validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x) + 1, validateWys(y) + 1].zywa;
         }
         #endregion
 
