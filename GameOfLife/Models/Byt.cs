@@ -40,7 +40,7 @@ namespace GameOfLife.Models
         public void Ubij()
         {
             zywa = 0;
-            symbol = "░";
+            symbol = "_";
         }
     }
 }
