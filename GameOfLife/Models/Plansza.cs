@@ -31,9 +31,9 @@ namespace GameOfLife.Models
         {
               "                                    ",
               "      1                             ",
-              "       1                            ",
-              "     111                            ",
-              "                                    ",
+              "       1           1                ",
+              "     111            1               ",
+              "                  111               ",
               "                                    ",
               "                                    ",
               "                                    "
@@ -207,57 +207,63 @@ namespace GameOfLife.Models
         //lewa góra
         private int slg(int x, int y)
         {
-            return bytyTemp[validateSzer(x) - 1, validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x - 1), validateWys(y - 1)].zywa;
         }
         //środek góra
         private int ssg(int x, int y)
         {
-            return bytyTemp[validateSzer(x), validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x), validateWys(y - 1)].zywa;
         }
         //prawa góra
         private int spg(int x, int y)
         {
-            return bytyTemp[validateSzer(x) + 1, validateWys(y) - 1].zywa;
+            return bytyTemp[validateSzer(x + 1), validateWys(y - 1)].zywa;
         }
         
         //lewa
         private int sl(int x, int y)
         {
-            return bytyTemp[validateSzer(x) - 1, validateWys(y)].zywa;
+            return bytyTemp[validateSzer(x - 1), validateWys(y)].zywa;
         }
         //prawa
         private int sp(int x, int y)
         {
-            return bytyTemp[validateSzer(x) + 1, validateWys(y)].zywa;
+            return bytyTemp[validateSzer(x + 1), validateWys(y)].zywa;
         }
 
         //lewa dol
         private int sld(int x, int y)
         {
-            return bytyTemp[validateSzer(x) - 1, validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x - 1), validateWys(y + 1)].zywa;
         }
         //środek dol
         private int ssd(int x, int y)
         {
-            return bytyTemp[validateSzer(x), validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x), validateWys(y + 1)].zywa;
         }
         //prawa dol
         private int spd(int x, int y)
         {
-            return bytyTemp[validateSzer(x) + 1, validateWys(y) + 1].zywa;
+            return bytyTemp[validateSzer(x + 1), validateWys(y + 1)].zywa;
         }
         #endregion
 
         //WALIDACJA WYSOKOSCI
         private int validateWys(int y)
         {
-            return Math.Max(Math.Min(y, wysokosc - 2), 1);
+            if (y < 0) return wysokosc-1;
+            if (y == wysokosc) return 0;
+            return y;
+            //return Math.Max(Math.Min(y, wysokosc - 1), 0);
         }
 
         //WALIDACJA SZEROKOSCI
         private int validateSzer(int x)
         {
-            return Math.Max(Math.Min(x, szerokosc - 2), 1);
+            if (x < 0) return szerokosc-1;
+            if (x == szerokosc) return 0;
+            return x;
+           // return Math.Max(Math.Min(x, szerokosc - 1), 0);
         }
 
     }
